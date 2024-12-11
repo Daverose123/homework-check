@@ -80,18 +80,19 @@
             border-radius: 50%;
             margin: 0 auto 5px auto;
             background-color: #fff;
-            background-size: cover; /* Ensure photo fits the circle */
-            background-position: center; /* Center the photo */
+            background-size: cover;
+            background-position: center;
             border: 2px solid #5a9bd4;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             transition: background-color 0.3s ease, border 0.3s ease;
+            overflow: hidden; /* Ensure the overlay fits the circle */
         }
 
         input[type="checkbox"] {
-            display: none; /* Hide the actual checkbox */
+            display: none;
         }
 
         /* Green overlay with tick when checked */
@@ -102,10 +103,13 @@
         }
 
         input[type="checkbox"]:checked + .student-avatar::after {
-            content: "✔"; /* Green tick */
+            content: "✔";
             font-size: 30px;
             color: white;
             position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .student-name {
@@ -122,78 +126,4 @@
             background: linear-gradient(135deg, #4267b2, #3b5998);
             color: white;
             font-size: 1rem;
-            font-weight: bold;
-            text-decoration: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-        }
-
-        .home-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-        }
-
-        .home-button span {
-            font-size: 1.5rem; /* Emoji size */
-        }
-
-        /* Add custom backgrounds for each student */
-        .student-avatar#charlene { background-image: url('charlene.jpg'); }
-        .student-avatar#mieke { background-image: url('mieke.jpg'); }
-        .student-avatar#asa { background-image: url('asa.jpg'); }
-        .student-avatar#audrea { background-image: url('audrea.jpg'); }
-        .student-avatar#zoe { background-image: url('zoe.jpg'); }
-        .student-avatar#yolanda { background-image: url('yolanda.jpg'); }
-        .student-avatar#luna { background-image: url('luna.jpg'); }
-        .student-avatar#helena { background-image: url('helena.jpg'); }
-        .student-avatar#casper { background-image: url('casper.jpg'); }
-        .student-avatar#angelynn { background-image: url('angelynn.jpg'); }
-        .student-avatar#olivia-lin { background-image: url('olivia-lin.jpg'); }
-        .student-avatar#hilary { background-image: url('hilary.jpg'); }
-        .student-avatar#olivia-ou { background-image: url('olivia-ou.jpg'); }
-        .student-avatar#emily { background-image: url('emily.jpg'); }
-        .student-avatar#weggis { background-image: url('weggis.jpg'); }
-        .student-avatar#gianna { background-image: url('gianna.jpg'); }
-        .student-avatar#mika { background-image: url('mika.jpg'); }
-        .student-avatar#thomas { background-image: url('thomas.jpg'); }
-    </style>
-</head>
-<body>
-    <!-- Home Button -->
-    <a href="https://davidrose.my.canva.site/" class="home-button">
-        <span>🏠</span> Home
-    </a>
-
-    <!-- Title -->
-    <div class="title-container">
-        <div class="title">Narwhal Homework Tracker</div>
-    </div>
-
-    <!-- Tracker -->
-    <div class="tracker-container">
-        <!-- Student Cards -->
-        <div class="student-card">
-            <input type="checkbox" id="charlene">
-            <label class="student-avatar" id="charlene" for="charlene"></label>
-            <div class="student-name">Charlene</div>
-        </div>
-        <div class="student-card">
-            <input type="checkbox" id="mieke">
-            <label class="student-avatar" id="mieke" for="mieke"></label>
-            <div class="student-name">Mieke</div>
-        </div>
-        <div class="student-card">
-            <input type="checkbox" id="asa">
-            <label class="student-avatar" id="asa" for="asa"></label>
-            <div class="student-name">Asa</div>
-        </div>
-        <!-- Repeat for all students -->
-    </div>
-</body>
-</html>
+            |oai:code-citation|
