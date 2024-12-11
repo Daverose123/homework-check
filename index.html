@@ -16,13 +16,11 @@
         }
 
         .tracker-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-wrap: wrap;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* Set 5 columns */
             gap: 20px;
             margin: 20px auto;
-            max-width: 800px;
+            max-width: 1000px; /* Adjust for better alignment */
         }
 
         .student-card {
