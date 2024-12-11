@@ -16,17 +16,17 @@
         }
 
         .title-container {
-            margin: 50px 0 40px 0; /* More padding above and below the title */
+            margin: 50px 0 80px 0;
         }
 
         .title {
             display: inline-block;
-            background: linear-gradient(135deg, #4267b2, #3b5998); /* Blue gradient */
+            background: linear-gradient(135deg, #4267b2, #3b5998);
             color: white;
             font-size: 2.5rem;
             font-weight: bold;
             text-transform: uppercase;
-            padding: 20px 40px; /* Increased padding for a larger clickable area */
+            padding: 20px 40px;
             border-radius: 30px;
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
             position: relative;
@@ -34,30 +34,30 @@
         }
 
         .title::before {
-            content: "🐋"; /* Optional emoji before the text */
+            content: "🐋";
             position: absolute;
-            left: -50px; /* Adjusted for larger emoji */
+            left: -50px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 4rem; /* Doubled emoji size */
+            font-size: 4rem;
         }
 
         .title::after {
-            content: "📘"; /* Optional emoji after the text */
+            content: "📘";
             position: absolute;
-            right: -50px; /* Adjusted for larger emoji */
+            right: -50px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 4rem; /* Doubled emoji size */
+            font-size: 4rem;
         }
 
         .tracker-container {
             display: grid;
-            grid-template-columns: repeat(5, 1fr); /* Set 5 columns */
-            gap: 40px; /* Increased gap for easier interaction on touchscreens */
+            grid-template-columns: repeat(5, 1fr);
+            gap: 40px;
             margin: 20px auto;
-            max-width: 1000px; /* Adjust for better alignment */
-            justify-content: center; /* Center align rows */
+            max-width: 1000px;
+            justify-content: center;
         }
 
         .student-card {
@@ -92,12 +92,12 @@
 
         /* When checkbox is checked, fill the circle with green and add tick */
         input[type="checkbox"]:checked + .student-avatar {
-            background-color: #4CAF50; /* Green background */
-            border: 2px solid #4CAF50; /* Green border */
+            background-color: #4CAF50;
+            border: 2px solid #4CAF50;
         }
 
         input[type="checkbox"]:checked + .student-avatar::after {
-            content: "✔"; /* Green tick */
+            content: "✔";
             font-size: 30px;
             color: white;
             position: absolute;
@@ -111,11 +111,45 @@
         }
 
         input[type="checkbox"] {
-            display: none; /* Hide the actual checkbox */
+            display: none;
+        }
+
+        /* Home Button Styles */
+        .home-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: linear-gradient(135deg, #4267b2, #3b5998);
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 30px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .home-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .home-button span {
+            font-size: 2rem;
         }
     </style>
 </head>
 <body>
+    <!-- Home Button -->
+    <a href="index.html" class="home-button">
+        <span>🏠</span> Home
+    </a>
+
     <!-- Title -->
     <div class="title-container">
         <div class="title">Narwhal Homework Tracker</div>
