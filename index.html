@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homework Tracker</title>
+    <title>Narwhal Homework Tracker</title>
     <style>
         /* General Styles */
         body {
@@ -15,18 +15,49 @@
             text-align: center;
         }
 
+        .title-container {
+            margin: 20px 0;
+        }
+
+        .title {
+            display: inline-block;
+            background: linear-gradient(135deg, #4267b2, #3b5998); /* Blue gradient */
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 15px 30px;
+            border-radius: 30px;
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .title::before {
+            content: "🐋"; /* Optional emoji or icon before the text */
+            position: absolute;
+            left: -35px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+        }
+
+        .title::after {
+            content: "📘"; /* Optional emoji or icon after the text */
+            position: absolute;
+            right: -35px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2rem;
+        }
+
         .tracker-container {
             display: grid;
             grid-template-columns: repeat(5, 1fr); /* Set 5 columns */
             gap: 20px;
             margin: 20px auto;
             max-width: 1000px; /* Adjust for better alignment */
-            justify-content: start; /* Start alignment for all rows */
-        }
-
-        .tracker-container::after {
-            content: ""; /* Create an empty grid item */
-            grid-column: span 2; /* Span 2 columns to balance the last row */
+            justify-content: center; /* Center align rows */
         }
 
         .student-card {
@@ -85,6 +116,12 @@
     </style>
 </head>
 <body>
+    <!-- Title -->
+    <div class="title-container">
+        <div class="title">Narwhal Homework Tracker</div>
+    </div>
+
+    <!-- Tracker -->
     <div class="tracker-container">
         <!-- Student Cards -->
         <div class="student-card">
@@ -99,96 +136,12 @@
             <div class="student-name">Mieke</div>
         </div>
 
-        <div class="student-card">
-            <input type="checkbox" id="asa">
-            <label class="student-avatar" for="asa"></label>
-            <div class="student-name">Asa</div>
-        </div>
-
-        <div class="student-card">
-            <input type="checkbox" id="audrea">
-            <label class="student-avatar" for="audrea"></label>
-            <div class="student-name">Audrea</div>
-        </div>
-
-        <div class="student-card">
-            <input type="checkbox" id="zoe">
-            <label class="student-avatar" for="zoe"></label>
-            <div class="student-name">Zoe</div>
-        </div>
-
-        <div class="student-card">
-            <input type="checkbox" id="yolanda">
-            <label class="student-avatar" for="yolanda"></label>
-            <div class="student-name">Yolanda</div>
-        </div>
-
-        <div class="student-card">
-            <input type="checkbox" id="luna">
-            <label class="student-avatar" for="luna"></label>
-            <div class="student-name">Luna</div>
-        </div>
-
-        <div class="student-card">
-            <input type="checkbox" id="helena">
-            <label class="student-avatar" for="helena"></label>
-            <div class="student-name">Helena</div>
-        </div>
-
-        <div class="student-card">
-            <input type="checkbox" id="casper">
-            <label class="student-avatar" for="casper"></label>
-            <div class="student-name">Casper</div>
-        </div>
-
-        <div class="student-card">
-            <input type="checkbox" id="angelynn">
-            <label class="student-avatar" for="angelynn"></label>
-            <div class="student-name">Angelynn</div>
-        </div>
-
-        <div class="student-card">
-            <input type="checkbox" id="olivia-lin">
-            <label class="student-avatar" for="olivia-lin"></label>
-            <div class="student-name">Olivia Lin</div>
-        </div>
-
-        <div class="student-card">
-            <input type="checkbox" id="hilary">
-            <label class="student-avatar" for="hilary"></label>
-            <div class="student-name">Hilary</div>
-        </div>
-
-        <div class="student-card">
-            <input type="checkbox" id="olivia-ou">
-            <label class="student-avatar" for="olivia-ou"></label>
-            <div class="student-name">Olivia Ou</div>
-        </div>
-
-        <div class="student-card">
-            <input type="checkbox" id="emily">
-            <label class="student-avatar" for="emily"></label>
-            <div class="student-name">Emily</div>
-        </div>
-
-        <div class="student-card">
-            <input type="checkbox" id="weggis">
-            <label class="student-avatar" for="weggis"></label>
-            <div class="student-name">Weggis</div>
-        </div>
-
-        <div class="student-card">
-            <input type="checkbox" id="gianna">
-            <label class="student-avatar" for="gianna"></label>
-            <div class="student-name">Gianna</div>
-        </div>
-
+        <!-- Add other student cards here -->
         <div class="student-card">
             <input type="checkbox" id="mika">
             <label class="student-avatar" for="mika"></label>
             <div class="student-name">Mika</div>
         </div>
-
         <div class="student-card">
             <input type="checkbox" id="thomas">
             <label class="student-avatar" for="thomas"></label>
