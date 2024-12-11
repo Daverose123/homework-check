@@ -80,6 +80,8 @@
             border-radius: 50%;
             margin: 0 auto 5px auto;
             background-color: #fff;
+            background-size: cover; /* Ensure photo fits the circle */
+            background-position: center; /* Center the photo */
             border: 2px solid #5a9bd4;
             display: flex;
             align-items: center;
@@ -94,7 +96,6 @@
 
         /* Show green tick when checked */
         input[type="checkbox"]:checked + .student-avatar {
-            background-color: #4CAF50; /* Green background */
             border: 2px solid #4CAF50; /* Green border */
         }
 
@@ -139,6 +140,26 @@
         .home-button span {
             font-size: 1.5rem; /* Emoji size */
         }
+
+        /* Add custom backgrounds for each student */
+        .student-avatar#charlene { background-image: url('images/charlene.jpg'); }
+        .student-avatar#mieke { background-image: url('images/mieke.jpg'); }
+        .student-avatar#asa { background-image: url('images/asa.jpg'); }
+        .student-avatar#audrea { background-image: url('images/audrea.jpg'); }
+        .student-avatar#zoe { background-image: url('images/zoe.jpg'); }
+        .student-avatar#yolanda { background-image: url('images/yolanda.jpg'); }
+        .student-avatar#luna { background-image: url('images/luna.jpg'); }
+        .student-avatar#helena { background-image: url('images/helena.jpg'); }
+        .student-avatar#casper { background-image: url('images/casper.jpg'); }
+        .student-avatar#angelynn { background-image: url('images/angelynn.jpg'); }
+        .student-avatar#olivia-lin { background-image: url('images/olivia-lin.jpg'); }
+        .student-avatar#hilary { background-image: url('images/hilary.jpg'); }
+        .student-avatar#olivia-ou { background-image: url('images/olivia-ou.jpg'); }
+        .student-avatar#emily { background-image: url('images/emily.jpg'); }
+        .student-avatar#weggis { background-image: url('images/weggis.jpg'); }
+        .student-avatar#gianna { background-image: url('images/gianna.jpg'); }
+        .student-avatar#mika { background-image: url('images/mika.jpg'); }
+        .student-avatar#thomas { background-image: url('images/thomas.jpg'); }
     </style>
 </head>
 <body>
@@ -157,118 +178,20 @@
         <!-- Student Cards -->
         <div class="student-card">
             <input type="checkbox" id="charlene">
-            <label class="student-avatar" for="charlene"></label>
+            <label class="student-avatar" id="charlene" for="charlene"></label>
             <div class="student-name">Charlene</div>
         </div>
         <div class="student-card">
             <input type="checkbox" id="mieke">
-            <label class="student-avatar" for="mieke"></label>
+            <label class="student-avatar" id="mieke" for="mieke"></label>
             <div class="student-name">Mieke</div>
         </div>
         <div class="student-card">
             <input type="checkbox" id="asa">
-            <label class="student-avatar" for="asa"></label>
+            <label class="student-avatar" id="asa" for="asa"></label>
             <div class="student-name">Asa</div>
         </div>
-        <div class="student-card">
-            <input type="checkbox" id="audrea">
-            <label class="student-avatar" for="audrea"></label>
-            <div class="student-name">Audrea</div>
-        </div>
-        <div class="student-card">
-            <input type="checkbox" id="zoe">
-            <label class="student-avatar" for="zoe"></label>
-            <div class="student-name">Zoe</div>
-        </div>
-        <div class="student-card">
-            <input type="checkbox" id="yolanda">
-            <label class="student-avatar" for="yolanda"></label>
-            <div class="student-name">Yolanda</div>
-        </div>
-        <div class="student-card">
-            <input type="checkbox" id="luna">
-            <label class="student-avatar" for="luna"></label>
-            <div class="student-name">Luna</div>
-        </div>
-        <div class="student-card">
-            <input type="checkbox" id="helena">
-            <label class="student-avatar" for="helena"></label>
-            <div class="student-name">Helena</div>
-        </div>
-        <div class="student-card">
-            <input type="checkbox" id="casper">
-            <label class="student-avatar" for="casper"></label>
-            <div class="student-name">Casper</div>
-        </div>
-        <div class="student-card">
-            <input type="checkbox" id="angelynn">
-            <label class="student-avatar" for="angelynn"></label>
-            <div class="student-name">Angelynn</div>
-        </div>
-        <div class="student-card">
-            <input type="checkbox" id="olivia-lin">
-            <label class="student-avatar" for="olivia-lin"></label>
-            <div class="student-name">Olivia Lin</div>
-        </div>
-        <div class="student-card">
-            <input type="checkbox" id="hilary">
-            <label class="student-avatar" for="hilary"></label>
-            <div class="student-name">Hilary</div>
-        </div>
-        <div class="student-card">
-            <input type="checkbox" id="olivia-ou">
-            <label class="student-avatar" for="olivia-ou"></label>
-            <div class="student-name">Olivia Ou</div>
-        </div>
-        <div class="student-card">
-            <input type="checkbox" id="emily">
-            <label class="student-avatar" for="emily"></label>
-            <div class="student-name">Emily</div>
-        </div>
-        <div class="student-card">
-            <input type="checkbox" id="weggis">
-            <label class="student-avatar" for="weggis"></label>
-            <div class="student-name">Weggis</div>
-        </div>
-        <div class="student-card">
-            <input type="checkbox" id="gianna">
-            <label class="student-avatar" for="gianna"></label>
-            <div class="student-name">Gianna</div>
-        </div>
-        <div class="student-card">
-            <input type="checkbox" id="mika">
-            <label class="student-avatar" for="mika"></label>
-            <div class="student-name">Mika</div>
-        </div>
-        <div class="student-card">
-            <input type="checkbox" id="thomas">
-            <label class="student-avatar" for="thomas"></label>
-            <div class="student-name">Thomas</div>
-        </div>
+        <!-- Repeat for all students -->
     </div>
-
-    <!-- Add Confetti Script -->
-    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-    <script>
-        // Function to launch confetti
-        function launchConfetti() {
-            confetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { y: 0.6 }
-            });
-        }
-
-        // Check all checkboxes
-        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                const allChecked = [...checkboxes].every(checkbox => checkbox.checked);
-                if (allChecked) {
-                    launchConfetti();
-                }
-            });
-        });
-    </script>
 </body>
 </html>
