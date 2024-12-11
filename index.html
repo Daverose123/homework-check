@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homework Tracker</title>
+    <style>
+        /* General Styles */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        .tracker-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+        .student-card {
+            background: linear-gradient(135deg, #d9e6f2, #b2cce3);
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 150px;
+            padding: 15px;
+            text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            position: relative;
+        }
+
+        .student-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .student-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            margin: 0 auto 10px auto;
+            background-color: #fff;
+            border: 2px solid #5a9bd4;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: background-color 0.3s ease, border 0.3s ease;
+        }
+
+        /* When checkbox is checked, fill the circle with green and add tick */
+        input[type="checkbox"]:checked + .student-avatar {
+            background-color: #4CAF50; /* Green background */
+            border: 2px solid #4CAF50; /* Green border */
+        }
+
+        input[type="checkbox"]:checked + .student-avatar::after {
+            content: "✔"; /* Green tick */
+            font-size: 30px;
+            color: white;
+            position: absolute;
+        }
+
+        .student-name {
+            font-size: 16px;
+            font-weight: bold;
+            color: #444;
+            margin-top: 10px;
+        }
+
+        input[type="checkbox"] {
+            display: none; /* Hide the actual checkbox */
+        }
+    </style>
+</head>
+<body>
+    <div class="tracker-container">
+        <!-- Student Cards -->
+        <div class="student-card">
+            <input type="checkbox" id="charlene">
+            <label class="student-avatar" for="charlene"></label>
+            <div class="student-name">Charlene</div>
+        </div>
+
+        <div class="student-card">
+            <input type="checkbox" id="mieke">
+            <label class="student-avatar" for="mieke"></label>
+            <div class="student-name">Mieke</div>
+        </div>
+
+        <div class="student-card">
+            <input type="checkbox" id="asa">
+            <label class="student-avatar" for="asa"></label>
+            <div class="student-name">Asa</div>
+        </div>
+
+        <div class="student-card">
+            <input type="checkbox" id="audrea">
+            <label class="student-avatar" for="audrea"></label>
+            <div class="student-name">Audrea</div>
+        </div>
+
+        <div class="student-card">
+            <input type="checkbox" id="zoe">
+            <label class="student-avatar" for="zoe"></label>
+            <div class="student-name">Zoe</div>
+        </div>
+
+        <div class="student-card">
+            <input type="checkbox" id="yolanda">
+            <label class="student-avatar" for="yolanda"></label>
+            <div class="student-name">Yolanda</div>
+        </div>
+
+        <div class="student-card">
+            <input type="checkbox" id="luna">
+            <label class="student-avatar" for="luna"></label>
+            <div class="student-name">Luna</div>
+        </div>
+
+        <div class="student-card">
+            <input type="checkbox" id="helena">
+            <label class="student-avatar" for="helena"></label>
+            <div class="student-name">Helena</div>
+        </div>
+
+        <div class="student-card">
+            <input type="checkbox" id="casper">
+            <label class="student-avatar" for="casper"></label>
+            <div class="student-name">Casper</div>
+        </div>
+
+        <div class="student-card">
+            <input type="checkbox" id="angelynn">
+            <label class="student-avatar" for="angelynn"></label>
+            <div class="student-name">Angelynn</div>
+        </div>
+
+        <div class="student-card">
+            <input type="checkbox" id="olivia-lin">
+            <label class="student-avatar" for="olivia-lin"></label>
+            <div class="student-name">Olivia Lin</div>
+        </div>
+
+        <div class="student-card">
+            <input type="checkbox" id="hilary">
+            <label class="student-avatar" for="hilary"></label>
+            <div class="student-name">Hilary</div>
+        </div>
+
+        <div class="student-card">
+            <input type="checkbox" id="olivia-ou">
+            <label class="student-avatar" for="olivia-ou"></label>
+            <div class="student-name">Olivia Ou</div>
+        </div>
+
+        <div class="student-card">
+            <input type="checkbox" id="emily">
+            <label class="student-avatar" for="emily"></label>
+            <div class="student-name">Emily</div>
+        </div>
+
+        <div class="student-card">
+            <input type="checkbox" id="weggis">
+            <label class="student-avatar" for="weggis"></label>
+            <div class="student-name">Weggis</div>
+        </div>
+
+        <div class="student-card">
+            <input type="checkbox" id="gianna">
+            <label class="student-avatar" for="gianna"></label>
+            <div class="student-name">Gianna</div>
+        </div>
+
+        <div class="student-card">
+            <input type="checkbox" id="mika">
+            <label class="student-avatar" for="mika"></label>
+            <div class="student-name">Mika</div>
+        </div>
+
+        <div class="student-card">
+            <input type="checkbox" id="thomas">
+            <label class="student-avatar" for="thomas"></label>
+            <div class="student-name">Thomas</div>
+        </div>
+    </div>
+</body>
+</html>
