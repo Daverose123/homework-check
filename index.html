@@ -110,11 +110,40 @@
             font-weight: bold;
             color: #444;
         }
+
+        /* Home Button Styles */
+        .home-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #4267b2, #3b5998);
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        .home-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+        }
+
+        .home-button span {
+            font-size: 1.5rem; /* Emoji size */
+        }
     </style>
 </head>
 <body>
     <!-- Home Button -->
-    <a href="https://your-home-page-link.com" class="home-button">
+    <a href="https://davidrose.my.canva.site/" class="home-button">
         <span>🏠</span> Home
     </a>
 
