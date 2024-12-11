@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Narwhal Homework Tracker</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         /* General Styles */
         body {
@@ -181,95 +182,109 @@
     <!-- Tracker -->
     <div class="tracker-container">
         <div class="student-card">
-            <input type="checkbox" id="charlene">
+            <input type="checkbox" id="charlene" onclick="checkCompletion()">
             <label class="student-avatar" id="charlene" for="charlene"></label>
             <div class="student-name">Charlene</div>
         </div>
         <div class="student-card">
-            <input type="checkbox" id="mieke">
+            <input type="checkbox" id="mieke" onclick="checkCompletion()">
             <label class="student-avatar" id="mieke" for="mieke"></label>
             <div class="student-name">Mieke</div>
         </div>
         <div class="student-card">
-            <input type="checkbox" id="asa">
+            <input type="checkbox" id="asa" onclick="checkCompletion()">
             <label class="student-avatar" id="asa" for="asa"></label>
             <div class="student-name">Asa</div>
         </div>
         <div class="student-card">
-            <input type="checkbox" id="audrea">
+            <input type="checkbox" id="audrea" onclick="checkCompletion()">
             <label class="student-avatar" id="audrea" for="audrea"></label>
             <div class="student-name">Audrea</div>
         </div>
         <div class="student-card">
-            <input type="checkbox" id="zoe">
+            <input type="checkbox" id="zoe" onclick="checkCompletion()">
             <label class="student-avatar" id="zoe" for="zoe"></label>
             <div class="student-name">Zoe</div>
         </div>
         <div class="student-card">
-            <input type="checkbox" id="yolanda">
+            <input type="checkbox" id="yolanda" onclick="checkCompletion()">
             <label class="student-avatar" id="yolanda" for="yolanda"></label>
             <div class="student-name">Yolanda</div>
         </div>
         <div class="student-card">
-            <input type="checkbox" id="luna">
+            <input type="checkbox" id="luna" onclick="checkCompletion()">
             <label class="student-avatar" id="luna" for="luna"></label>
             <div class="student-name">Luna</div>
         </div>
         <div class="student-card">
-            <input type="checkbox" id="helena">
+            <input type="checkbox" id="helena" onclick="checkCompletion()">
             <label class="student-avatar" id="helena" for="helena"></label>
             <div class="student-name">Helena</div>
         </div>
         <div class="student-card">
-            <input type="checkbox" id="casper">
+            <input type="checkbox" id="casper" onclick="checkCompletion()">
             <label class="student-avatar" id="casper" for="casper"></label>
             <div class="student-name">Casper</div>
         </div>
         <div class="student-card">
-            <input type="checkbox" id="angelynn">
+            <input type="checkbox" id="angelynn" onclick="checkCompletion()">
             <label class="student-avatar" id="angelynn" for="angelynn"></label>
             <div class="student-name">Angelynn</div>
         </div>
         <div class="student-card">
-            <input type="checkbox" id="olivia-lin">
+            <input type="checkbox" id="olivia-lin" onclick="checkCompletion()">
             <label class="student-avatar" id="olivia-lin" for="olivia-lin"></label>
             <div class="student-name">Olivia Lin</div>
         </div>
         <div class="student-card">
-            <input type="checkbox" id="hilary">
+            <input type="checkbox" id="hilary" onclick="checkCompletion()">
             <label class="student-avatar" id="hilary" for="hilary"></label>
             <div class="student-name">Hilary</div>
         </div>
         <div class="student-card">
-            <input type="checkbox" id="olivia-ou">
+            <input type="checkbox" id="olivia-ou" onclick="checkCompletion()">
             <label class="student-avatar" id="olivia-ou" for="olivia-ou"></label>
             <div class="student-name">Olivia Ou</div>
         </div>
         <div class="student-card">
-            <input type="checkbox" id="emily">
+            <input type="checkbox" id="emily" onclick="checkCompletion()">
             <label class="student-avatar" id="emily" for="emily"></label>
             <div class="student-name">Emily</div>
         </div>
         <div class="student-card">
-            <input type="checkbox" id="weggis">
+            <input type="checkbox" id="weggis" onclick="checkCompletion()">
             <label class="student-avatar" id="weggis" for="weggis"></label>
             <div class="student-name">Weggis</div>
         </div>
         <div class="student-card">
-            <input type="checkbox" id="gianna">
+            <input type="checkbox" id="gianna" onclick="checkCompletion()">
             <label class="student-avatar" id="gianna" for="gianna"></label>
             <div class="student-name">Gianna</div>
         </div>
         <div class="student-card">
-            <input type="checkbox" id="mika">
+            <input type="checkbox" id="mika" onclick="checkCompletion()">
             <label class="student-avatar" id="mika" for="mika"></label>
             <div class="student-name">Mika</div>
         </div>
         <div class="student-card">
-            <input type="checkbox" id="thomas">
+            <input type="checkbox" id="thomas" onclick="checkCompletion()">
             <label class="student-avatar" id="thomas" for="thomas"></label>
             <div class="student-name">Thomas</div>
         </div>
     </div>
+
+    <script>
+        function checkCompletion() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+            if (allChecked) {
+                confetti({
+                    particleCount: 150,
+                    spread: 70,
+                    origin: { y: 0.6 }
+                });
+            }
+        }
+    </script>
 </body>
 </html>
