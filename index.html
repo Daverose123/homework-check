@@ -16,59 +16,56 @@
         }
 
         .title-container {
-            margin: 50px 0 80px 0;
+            margin: 20px 0 40px 0; /* Reduce spacing above and below the title */
         }
 
         .title {
             display: inline-block;
             background: linear-gradient(135deg, #4267b2, #3b5998);
             color: white;
-            font-size: 2.5rem;
+            font-size: 2rem; /* Slightly smaller title font size */
             font-weight: bold;
             text-transform: uppercase;
-            padding: 20px 40px;
-            border-radius: 30px;
-            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+            padding: 10px 20px; /* Reduce padding for a more compact title */
+            border-radius: 20px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
             position: relative;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
         }
 
         .title::before {
             content: "🐋";
             position: absolute;
-            left: -50px;
+            left: -40px; /* Adjusted for compact layout */
             top: 50%;
             transform: translateY(-50%);
-            font-size: 4rem;
+            font-size: 3rem; /* Reduced emoji size */
         }
 
         .title::after {
             content: "📘";
             position: absolute;
-            right: -50px;
+            right: -40px;
             top: 50%;
             transform: translateY(-50%);
-            font-size: 4rem;
+            font-size: 3rem;
         }
 
         .tracker-container {
             display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 40px;
-            margin: 20px auto;
-            max-width: 1000px;
-            justify-content: center;
+            grid-template-columns: repeat(6, 1fr); /* 6 columns */
+            gap: 20px; /* Reduced gap between cards */
+            margin: 10px auto;
+            max-width: 1000px; /* Adjust width for a compact layout */
         }
 
         .student-card {
             background: linear-gradient(135deg, #d9e6f2, #b2cce3);
-            border-radius: 15px;
+            border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            width: 150px;
-            padding: 15px;
+            width: 120px; /* Smaller card width */
+            padding: 10px;
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
         }
 
         .student-card:hover {
@@ -77,76 +74,49 @@
         }
 
         .student-avatar {
-            width: 60px;
-            height: 60px;
+            width: 50px; /* Smaller avatar size */
+            height: 50px;
             border-radius: 50%;
-            margin: 0 auto 10px auto;
+            margin: 0 auto 5px auto;
             background-color: #fff;
             border: 2px solid #5a9bd4;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
-            transition: background-color 0.3s ease, border 0.3s ease;
-        }
-
-        /* When checkbox is checked, fill the circle with green and add tick */
-        input[type="checkbox"]:checked + .student-avatar {
-            background-color: #4CAF50;
-            border: 2px solid #4CAF50;
-        }
-
-        input[type="checkbox"]:checked + .student-avatar::after {
-            content: "✔";
-            font-size: 30px;
-            color: white;
-            position: absolute;
         }
 
         .student-name {
-            font-size: 16px;
+            font-size: 14px; /* Smaller name font size */
             font-weight: bold;
             color: #444;
-            margin-top: 10px;
-        }
-
-        input[type="checkbox"] {
-            display: none;
         }
 
         /* Home Button Styles */
         .home-button {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 10px; /* Adjust position for compact layout */
+            right: 10px;
             background: linear-gradient(135deg, #4267b2, #3b5998);
             color: white;
-            font-size: 1.5rem;
+            font-size: 1rem; /* Smaller font size for the button */
             font-weight: bold;
             text-decoration: none;
-            padding: 10px 20px;
-            border-radius: 30px;
+            padding: 8px 15px; /* Smaller button size */
+            border-radius: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 10px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
-        }
-
-        .home-button:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            gap: 5px;
         }
 
         .home-button span {
-            font-size: 2rem;
+            font-size: 1.5rem; /* Smaller emoji size */
         }
     </style>
 </head>
 <body>
     <!-- Home Button -->
-    <a href="https://davidrose.my.canva.site/#home" class="home-button">
+    <a href="https://your-home-page-link.com" class="home-button">
         <span>🏠</span> Home
     </a>
 
@@ -157,108 +127,87 @@
 
     <!-- Tracker -->
     <div class="tracker-container">
+        <!-- Student Cards -->
         <div class="student-card">
             <input type="checkbox" id="charlene">
             <label class="student-avatar" for="charlene"></label>
             <div class="student-name">Charlene</div>
         </div>
-
         <div class="student-card">
             <input type="checkbox" id="mieke">
             <label class="student-avatar" for="mieke"></label>
             <div class="student-name">Mieke</div>
         </div>
-
         <div class="student-card">
             <input type="checkbox" id="asa">
             <label class="student-avatar" for="asa"></label>
             <div class="student-name">Asa</div>
         </div>
-
         <div class="student-card">
             <input type="checkbox" id="audrea">
             <label class="student-avatar" for="audrea"></label>
             <div class="student-name">Audrea</div>
         </div>
-
         <div class="student-card">
             <input type="checkbox" id="zoe">
             <label class="student-avatar" for="zoe"></label>
             <div class="student-name">Zoe</div>
         </div>
-
         <div class="student-card">
             <input type="checkbox" id="yolanda">
             <label class="student-avatar" for="yolanda"></label>
             <div class="student-name">Yolanda</div>
         </div>
-
         <div class="student-card">
             <input type="checkbox" id="luna">
             <label class="student-avatar" for="luna"></label>
             <div class="student-name">Luna</div>
         </div>
-
         <div class="student-card">
             <input type="checkbox" id="helena">
             <label class="student-avatar" for="helena"></label>
             <div class="student-name">Helena</div>
         </div>
-
         <div class="student-card">
             <input type="checkbox" id="casper">
             <label class="student-avatar" for="casper"></label>
             <div class="student-name">Casper</div>
         </div>
-
         <div class="student-card">
             <input type="checkbox" id="angelynn">
             <label class="student-avatar" for="angelynn"></label>
             <div class="student-name">Angelynn</div>
         </div>
-
         <div class="student-card">
-            <input type="checkbox" id="olivia1">
-            <label class="student-avatar" for="olivia1"></label>
+            <input type="checkbox" id="olivia">
+            <label class="student-avatar" for="olivia"></label>
             <div class="student-name">Olivia</div>
         </div>
-
         <div class="student-card">
             <input type="checkbox" id="hilary">
             <label class="student-avatar" for="hilary"></label>
             <div class="student-name">Hilary</div>
         </div>
-
-        <div class="student-card">
-            <input type="checkbox" id="olivia2">
-            <label class="student-avatar" for="olivia2"></label>
-            <div class="student-name">Olivia</div>
-        </div>
-
         <div class="student-card">
             <input type="checkbox" id="emily">
             <label class="student-avatar" for="emily"></label>
             <div class="student-name">Emily</div>
         </div>
-
         <div class="student-card">
             <input type="checkbox" id="weggis">
             <label class="student-avatar" for="weggis"></label>
             <div class="student-name">Weggis</div>
         </div>
-
         <div class="student-card">
             <input type="checkbox" id="gianna">
             <label class="student-avatar" for="gianna"></label>
             <div class="student-name">Gianna</div>
         </div>
-
         <div class="student-card">
             <input type="checkbox" id="mika">
             <label class="student-avatar" for="mika"></label>
             <div class="student-name">Mika</div>
         </div>
-
         <div class="student-card">
             <input type="checkbox" id="thomas">
             <label class="student-avatar" for="thomas"></label>
