@@ -16,17 +16,17 @@
         }
 
         .title-container {
-            margin: 20px 0;
+            margin: 50px 0 40px 0; /* More padding above and below the title */
         }
 
         .title {
             display: inline-block;
             background: linear-gradient(135deg, #4267b2, #3b5998); /* Blue gradient */
             color: white;
-            font-size: 2rem;
+            font-size: 2.5rem;
             font-weight: bold;
             text-transform: uppercase;
-            padding: 15px 30px;
+            padding: 20px 40px; /* Increased padding for a larger clickable area */
             border-radius: 30px;
             box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
             position: relative;
@@ -34,27 +34,27 @@
         }
 
         .title::before {
-            content: "🐋"; /* Optional emoji or icon before the text */
+            content: "🐋"; /* Optional emoji before the text */
             position: absolute;
-            left: -35px;
+            left: -50px; /* Adjusted for larger emoji */
             top: 50%;
             transform: translateY(-50%);
-            font-size: 2rem;
+            font-size: 4rem; /* Doubled emoji size */
         }
 
         .title::after {
-            content: "📘"; /* Optional emoji or icon after the text */
+            content: "📘"; /* Optional emoji after the text */
             position: absolute;
-            right: -35px;
+            right: -50px; /* Adjusted for larger emoji */
             top: 50%;
             transform: translateY(-50%);
-            font-size: 2rem;
+            font-size: 4rem; /* Doubled emoji size */
         }
 
         .tracker-container {
             display: grid;
             grid-template-columns: repeat(5, 1fr); /* Set 5 columns */
-            gap: 20px;
+            gap: 40px; /* Increased gap for easier interaction on touchscreens */
             margin: 20px auto;
             max-width: 1000px; /* Adjust for better alignment */
             justify-content: center; /* Center align rows */
