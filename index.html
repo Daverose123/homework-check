@@ -94,9 +94,11 @@
             display: none; /* Hide the actual checkbox */
         }
 
-        /* Show green tick when checked */
+        /* Green overlay with tick when checked */
         input[type="checkbox"]:checked + .student-avatar {
+            background-color: #4CAF50; /* Green background */
             border: 2px solid #4CAF50; /* Green border */
+            background-image: none; /* Remove the photo */
         }
 
         input[type="checkbox"]:checked + .student-avatar::after {
