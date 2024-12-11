@@ -64,6 +64,7 @@
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             width: 120px;
+            height: 160px; /* Set fixed height */
             padding: 10px;
             text-align: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -89,6 +90,7 @@
             justify-content: center;
             position: relative;
             transition: background-color 0.3s ease, border 0.3s ease;
+            box-sizing: border-box; /* Ensures border doesn't increase total size */
         }
 
         input[type="checkbox"] {
@@ -97,9 +99,9 @@
 
         /* Green overlay with thicker border and tick when checked */
         input[type="checkbox"]:checked + .student-avatar {
-            background-color: #4CAF50; /* Green background */
+            background-color: #4CAF50;
             border: 5px solid #4CAF50; /* Thicker green border */
-            background-image: none; /* Remove the photo */
+            background-image: none;
         }
 
         input[type="checkbox"]:checked + .student-avatar::after {
