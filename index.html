@@ -3,1179 +3,288 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>📚🐋 Homework & Progress Tracker 🎯📊</title>
+    <title>Narwhal Homework Tracker</title>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
     <style>
         /* General Styles */
         body {
-            font-family: 'Comic Sans MS', cursive, sans-serif;
-            background-color: #e0f7fa;
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
             margin: 0;
             padding: 0;
             text-align: center;
-            box-sizing: border-box;
         }
 
-        /* Startup Modal Styles */
-        .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 150, 136, 0.8);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 100;
+        .title-container {
+            margin: 20px 0 40px 0;
         }
 
-        .modal {
-            background-color: #ffffff;
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-            width: 80%;
-            max-width: 500px;
-            text-align: center;
-            animation: fadeIn 0.5s ease-in-out;
-        }
-
-        .modal h2 {
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            color: #00796b;
-        }
-
-        .modal button {
-            background: linear-gradient(45deg, #00c853, #64dd17);
-            border: none;
+        .title {
+            display: inline-block;
+            background: linear-gradient(135deg, #4267b2, #3b5998);
             color: white;
-            padding: 15px 25px;
-            margin: 10px;
-            font-size: 1rem;
-            border-radius: 50px;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .modal button:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: scale(0.8); }
-            to { opacity: 1; transform: scale(1); }
-        }
-
-        /* Navigation Bar Styles */
-        .navbar {
-            background-color: #004d40;
-            padding: 10px 0;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        .navbar button {
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.1rem;
-            margin: 0 15px;
-            cursor: pointer;
-            transition: color 0.3s;
+            font-size: 2rem;
+            font-weight: bold;
+            text-transform: uppercase;
             padding: 10px 20px;
             border-radius: 20px;
-        }
-
-        .navbar button:hover, .navbar button.active {
-            background-color: #00695c;
-            color: #ffffff;
-        }
-
-        /* Countdown and Quote Styles */
-        .countdown-container, .quote-container {
-            margin: 20px auto;
-            padding: 10px;
-            max-width: 800px;
-            text-align: center;
-        }
-
-        .countdown-container span, .quote-container span {
-            font-size: 1.3rem;
-            font-weight: bold;
-            display: block;
-            margin-bottom: 10px;
-            color: #00695c;
-        }
-
-        .quote-container {
-            font-style: italic;
-            font-size: 1.1rem;
-            color: #004d40;
-        }
-
-        /* Progress Section Styles */
-        .progress-section, .homework-section {
-            margin: 20px auto;
-            padding: 20px;
-            max-width: 1200px;
-            text-align: center;
-        }
-
-        .progress-section h2, .homework-section h2 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-            color: #00796b;
-        }
-
-        /* Class Progress Bar */
-        .class-progress-bar {
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
             position: relative;
-            width: 80%;
-            height: 30px;
-            background-color: #b2dfdb;
-            border-radius: 15px;
-            margin: 0 auto 30px auto;
-            overflow: hidden;
-            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
         }
 
-        .class-progress-fill {
+        .title::before {
+            content: "🐋";
             position: absolute;
-            left: 0;
-            top: 0;
-            width: 0%;
-            height: 100%;
-            background: linear-gradient(135deg, #66bb6a, #43a047);
-            border-radius: 15px;
-            transition: width 1s ease-in-out;
+            left: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
         }
 
-        /* Grid Container */
-        .grid-container {
+        .title::after {
+            content: "📘";
+            position: absolute;
+            right: -40px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 3rem;
+        }
+
+        .tracker-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            grid-template-columns: repeat(6, 1fr);
             gap: 20px;
-            padding: 20px;
-            max-width: 1200px;
-            margin: 0 auto;
+            margin: 10px auto;
+            max-width: 1000px;
         }
 
-        /* Student Card Styles */
         .student-card {
-            background: linear-gradient(135deg, #d1c4e9, #b39ddb);
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            background: linear-gradient(135deg, #d9e6f2, #b2cce3);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 120px;
+            padding: 10px;
             text-align: center;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            transition: transform 0.3s, box-shadow 0.3s;
         }
 
         .student-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
         }
 
-        /* Student Avatar */
         .student-avatar {
-            width: 80px;
-            height: 80px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            margin-bottom: 15px;
+            margin: 0 auto 5px auto;
             background-color: #fff;
             background-size: cover;
             background-position: center;
-            border: 5px solid #7e57c2;
+            border: 5px solid #5a9bd4;
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
             transition: background-color 0.3s ease, border 0.3s ease;
-            cursor: pointer;
         }
 
-        /* Homework Completion Styles */
-        .homework-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(76, 175, 80, 0.7); /* Green overlay */
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            opacity: 0;
-            transition: opacity 0.3s ease;
+        input[type="checkbox"] {
+            display: none;
         }
 
-        .homework-overlay.show {
-            opacity: 1;
+        /* Green overlay with thicker border and tick when checked */
+        input[type="checkbox"]:checked + .student-avatar {
+            background-color: #4CAF50; /* Green background */
+            border: 5px solid #4CAF50; /* Thicker green border */
+            background-image: none; /* Remove the photo */
         }
 
-        .homework-overlay::after {
-            content: "✅";
-            font-size: 2rem;
+        input[type="checkbox"]:checked + .student-avatar::after {
+            content: "✔";
+            font-size: 30px;
             color: white;
-        }
-
-        /* Progress Circle Styles */
-        .progress-circle-container {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin: 20px 0;
-            flex-wrap: wrap;
-        }
-
-        .progress-circle {
-            position: relative;
-            width: 80px;
-            height: 80px;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            outline: none; /* Remove default focus outline */
-        }
-
-        .progress-circle:hover,
-        .progress-circle:focus {
-            transform: scale(1.1);
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
-        }
-
-        .progress-ring__background {
-            stroke: #c5cae9; /* Light purple */
-            stroke-width: 8;
-            fill: transparent;
-        }
-
-        .progress-ring__circle {
-            transition: stroke-dashoffset 1s ease-in-out;
-            transform: rotate(-90deg);
-            transform-origin: 50% 50%;
-            stroke-dasharray: 157.08 157.08; /* 2 * PI * 25 */
-            stroke-dashoffset: 157.08;
-            stroke-linecap: round; /* Rounded ends */
-        }
-
-        /* Dynamic colors based on metric */
-        .progress-circle[data-metric="reading"] .progress-ring__circle {
-            stroke: #66bb6a; /* Green */
-        }
-
-        .progress-circle[data-metric="language"] .progress-ring__circle {
-            stroke: #42a5f5; /* Blue */
-        }
-
-        .progress-circle[data-metric="quizzes"] .progress-ring__circle {
-            stroke: #ffa726; /* Orange */
-        }
-
-        .progress-circle.selected .progress-ring__circle {
-            stroke: #00897b; /* Teal when selected */
-            stroke-width: 10;
-        }
-
-        .progress-circle-content {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            font-size: 0.8rem;
-            color: #333;
-            text-align: center;
         }
 
-        /* Medal Styles */
-        .student-name.completed::before,
-        .student-name.completed::after {
-            content: '🏅';
-            font-size: 1.2rem;
-            margin: 0 5px;
-        }
-
-        /* Homework Section Styles */
-        .homework-section {
-            display: none; /* Hidden by default */
-        }
-
-        .homework-section.active {
-            display: block;
-        }
-
-        /* IXL Progress Section Styles */
-        .progress-section {
-            display: none; /* Hidden by default */
-        }
-
-        .progress-section.active {
-            display: block;
-        }
-
-        /* Keypad Styles */
-        .keypad-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.5);
-            display: none;
-            z-index: 500;
-        }
-
-        .keypad {
-            display: none;
-            position: fixed;
-            background: rgba(255, 255, 255, 0.95);
-            border-radius: 10px;
-            padding: 20px;
-            width: 250px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-            z-index: 1000;
-            left: 50%;
-            top: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .keypad .close-button {
-            position: absolute;
-            top: 5px;
-            right: 10px;
-            background: transparent;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        .keypad .keypad-display {
-            margin-bottom: 15px;
-            font-size: 1.2rem;
+        .student-name {
+            font-size: 14px;
             font-weight: bold;
-            color: #333;
-            text-align: center;
-            min-height: 30px;
+            color: #444;
         }
 
-        .keypad .keypad-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-
-        .keypad .key {
+        /* Home Button Styles */
+        .home-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: linear-gradient(135deg, #4267b2, #3b5998);
+            color: white;
+            font-size: 1rem;
+            font-weight: bold;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
             display: flex;
             align-items: center;
-            justify-content: center;
-            width: 60px;
-            height: 60px;
-            font-size: 1.2rem;
-            background: #7e57c2;
-            color: white;
-            border-radius: 10px;
-            cursor: pointer;
-            user-select: none;
-            transition: background 0.3s;
+            gap: 5px;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.2);
         }
 
-        .keypad .key:hover {
-            background: #9575cd;
+        .home-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
         }
 
-        .keypad .clear {
-            background: #e53935;
+        .home-button span {
+            font-size: 1.5rem;
         }
 
-        .keypad .clear:hover {
-            background: #ef5350;
-        }
-
-        .keypad .confirm {
-            background: #43a047;
-        }
-
-        .keypad .confirm:hover {
-            background: #66bb6a;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .progress-circle {
-                width: 60px;
-                height: 60px;
-            }
-
-            .progress-circle-content {
-                font-size: 0.7rem;
-            }
-
-            .class-progress-bar {
-                width: 90%;
-            }
-
-            .student-card {
-                width: 180px;
-            }
-
-            .modal {
-                width: 90%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .progress-circle {
-                width: 50px;
-                height: 50px;
-            }
-
-            .progress-circle-content {
-                font-size: 0.6rem;
-            }
-
-            .class-progress-bar {
-                width: 95%;
-            }
-
-            .student-card {
-                width: 160px;
-            }
-        }
+        /* Add custom backgrounds for each student */
+        .student-avatar#charlene { background-image: url('charlene.jpg'); }
+        .student-avatar#mieke { background-image: url('mieke.jpg'); }
+        .student-avatar#asa { background-image: url('asa.jpg'); }
+        .student-avatar#audrea { background-image: url('audrea.jpg'); }
+        .student-avatar#zoe { background-image: url('zoe.jpg'); }
+        .student-avatar#yolanda { background-image: url('yolanda.jpg'); }
+        .student-avatar#luna { background-image: url('luna.jpg'); }
+        .student-avatar#helena { background-image: url('helena.jpg'); }
+        .student-avatar#casper { background-image: url('casper.jpg'); }
+        .student-avatar#angelynn { background-image: url('angelynn.jpg'); }
+        .student-avatar#olivia-lin { background-image: url('olivia-lin.jpg'); }
+        .student-avatar#hilary { background-image: url('hilary.jpg'); }
+        .student-avatar#olivia-ou { background-image: url('olivia-ou.jpg'); }
+        .student-avatar#emily { background-image: url('emily.jpg'); }
+        .student-avatar#weggis { background-image: url('weggis.jpg'); }
+        .student-avatar#gianna { background-image: url('gianna.jpg'); }
+        .student-avatar#mika { background-image: url('mika.jpg'); }
+        .student-avatar#thomas { background-image: url('thomas.jpg'); }
     </style>
 </head>
 <body>
-    <!-- Startup Modal -->
-    <div class="modal-overlay" id="startup-modal">
-        <div class="modal">
-            <h2>Welcome! 🎉</h2>
-            <p>What would you like to do today?</p>
-            <button onclick="openHomework()" aria-label="Check Homework">
-                📝 Check Homework
-            </button>
-            <button onclick="openProgress()" aria-label="Record IXL and Read Theory Progress">
-                📈 Record Progress
-            </button>
+    <!-- Home Button -->
+    <a href="https://davidrose.my.canva.site/" class="home-button">
+        <span>🏠</span> Home
+    </a>
+
+    <!-- Title -->
+    <div class="title-container">
+        <div class="title">Narwhal Homework Tracker</div>
+    </div>
+
+    <!-- Tracker -->
+    <div class="tracker-container">
+        <div class="student-card">
+            <input type="checkbox" id="charlene" onclick="checkCompletion()">
+            <label class="student-avatar" id="charlene" for="charlene"></label>
+            <div class="student-name">Charlene</div>
         </div>
-    </div>
-
-    <!-- Navigation Bar -->
-    <div class="navbar">
-        <button id="nav-homework" onclick="openHomework()" class="active">📝 Homework</button>
-        <button id="nav-progress" onclick="openProgress()">📈 Progress</button>
-    </div>
-
-    <!-- Countdown and Quote Sections -->
-    <div class="countdown-container">
-        <span id="days-left">📅 Loading days left...</span>
-    </div>
-
-    <div class="quote-container">
-        <span id="daily-quote">📜 Loading daily quote...</span>
-    </div>
-
-    <!-- Class Progress Section -->
-    <div class="progress-section" id="progress-section">
-        <h2>Class Progress 🌟</h2>
-        <div class="class-progress-bar">
-            <div class="class-progress-fill" id="class-progress-fill"></div>
+        <div class="student-card">
+            <input type="checkbox" id="mieke" onclick="checkCompletion()">
+            <label class="student-avatar" id="mieke" for="mieke"></label>
+            <div class="student-name">Mieke</div>
         </div>
-    </div>
-
-    <!-- Homework Tracker Section -->
-    <div class="homework-section active" id="homework-section">
-        <h2>🐋 Narwhal Homework Tracker 📝</h2>
-        <div class="grid-container" id="homework-grid">
-            <!-- Homework Student Cards -->
-            <!-- These will be dynamically generated -->
+        <div class="student-card">
+            <input type="checkbox" id="asa" onclick="checkCompletion()">
+            <label class="student-avatar" id="asa" for="asa"></label>
+            <div class="student-name">Asa</div>
         </div>
-    </div>
-
-    <!-- IXL and Read Theory Progress Tracker Section -->
-    <div class="progress-section" id="ixl-section">
-        <h2>📚 IXL & Read Theory Progress Tracker 🎯</h2>
-        <div class="grid-container" id="progress-grid">
-            <!-- Progress Student Cards -->
-            <!-- These will be dynamically generated -->
+        <div class="student-card">
+            <input type="checkbox" id="audrea" onclick="checkCompletion()">
+            <label class="student-avatar" id="audrea" for="audrea"></label>
+            <div class="student-name">Audrea</div>
         </div>
-    </div>
-
-    <!-- Keypad Modal for Progress Tracker -->
-    <div id="keypad-overlay" class="keypad-overlay" onclick="closeKeypad()"></div>
-    <div id="keypad" class="keypad" role="dialog" aria-modal="true" aria-labelledby="keypad-display">
-        <button class="close-button" onclick="closeKeypad()" aria-label="Close keypad">✖</button>
-        <div id="keypad-display" class="keypad-display" aria-live="polite"></div>
-        <div class="keypad-grid">
-            <div class="key" onclick="addKey('1')" tabindex="0" role="button" aria-label="Key 1">1</div>
-            <div class="key" onclick="addKey('2')" tabindex="0" role="button" aria-label="Key 2">2</div>
-            <div class="key" onclick="addKey('3')" tabindex="0" role="button" aria-label="Key 3">3</div>
-            <div class="key" onclick="addKey('4')" tabindex="0" role="button" aria-label="Key 4">4</div>
-            <div class="key" onclick="addKey('5')" tabindex="0" role="button" aria-label="Key 5">5</div>
-            <div class="key" onclick="addKey('6')" tabindex="0" role="button" aria-label="Key 6">6</div>
-            <div class="key" onclick="addKey('7')" tabindex="0" role="button" aria-label="Key 7">7</div>
-            <div class="key" onclick="addKey('8')" tabindex="0" role="button" aria-label="Key 8">8</div>
-            <div class="key" onclick="addKey('9')" tabindex="0" role="button" aria-label="Key 9">9</div>
-            <div class="key clear" onclick="clearKeypad()" tabindex="0" role="button" aria-label="Clear keypad">Clear</div>
-            <div class="key" onclick="addKey('0')" tabindex="0" role="button" aria-label="Key 0">0</div>
-            <div class="key confirm" onclick="saveKeypad()" tabindex="0" role="button" aria-label="Confirm input">✔</div>
+        <div class="student-card">
+            <input type="checkbox" id="zoe" onclick="checkCompletion()">
+            <label class="student-avatar" id="zoe" for="zoe"></label>
+            <div class="student-name">Zoe</div>
+        </div>
+        <div class="student-card">
+            <input type="checkbox" id="yolanda" onclick="checkCompletion()">
+            <label class="student-avatar" id="yolanda" for="yolanda"></label>
+            <div class="student-name">Yolanda</div>
+        </div>
+        <div class="student-card">
+            <input type="checkbox" id="luna" onclick="checkCompletion()">
+            <label class="student-avatar" id="luna" for="luna"></label>
+            <div class="student-name">Luna</div>
+        </div>
+        <div class="student-card">
+            <input type="checkbox" id="helena" onclick="checkCompletion()">
+            <label class="student-avatar" id="helena" for="helena"></label>
+            <div class="student-name">Helena</div>
+        </div>
+        <div class="student-card">
+            <input type="checkbox" id="casper" onclick="checkCompletion()">
+            <label class="student-avatar" id="casper" for="casper"></label>
+            <div class="student-name">Casper</div>
+        </div>
+        <div class="student-card">
+            <input type="checkbox" id="angelynn" onclick="checkCompletion()">
+            <label class="student-avatar" id="angelynn" for="angelynn"></label>
+            <div class="student-name">Angelynn</div>
+        </div>
+        <div class="student-card">
+            <input type="checkbox" id="olivia-lin" onclick="checkCompletion()">
+            <label class="student-avatar" id="olivia-lin" for="olivia-lin"></label>
+            <div class="student-name">Olivia Lin</div>
+        </div>
+        <div class="student-card">
+            <input type="checkbox" id="hilary" onclick="checkCompletion()">
+            <label class="student-avatar" id="hilary" for="hilary"></label>
+            <div class="student-name">Hilary</div>
+        </div>
+        <div class="student-card">
+            <input type="checkbox" id="olivia-ou" onclick="checkCompletion()">
+            <label class="student-avatar" id="olivia-ou" for="olivia-ou"></label>
+            <div class="student-name">Olivia Ou</div>
+        </div>
+        <div class="student-card">
+            <input type="checkbox" id="emily" onclick="checkCompletion()">
+            <label class="student-avatar" id="emily" for="emily"></label>
+            <div class="student-name">Emily</div>
+        </div>
+        <div class="student-card">
+            <input type="checkbox" id="weggis" onclick="checkCompletion()">
+            <label class="student-avatar" id="weggis" for="weggis"></label>
+            <div class="student-name">Weggis</div>
+        </div>
+        <div class="student-card">
+            <input type="checkbox" id="gianna" onclick="checkCompletion()">
+            <label class="student-avatar" id="gianna" for="gianna"></label>
+            <div class="student-name">Gianna</div>
+        </div>
+        <div class="student-card">
+            <input type="checkbox" id="mika" onclick="checkCompletion()">
+            <label class="student-avatar" id="mika" for="mika"></label>
+            <div class="student-name">Mika</div>
+        </div>
+        <div class="student-card">
+            <input type="checkbox" id="thomas" onclick="checkCompletion()">
+            <label class="student-avatar" id="thomas" for="thomas"></label>
+            <div class="student-name">Thomas</div>
         </div>
     </div>
 
     <script>
-        // Constants
-        const MAX_READING = 15;
-        const MAX_LANGUAGE = 15;
-        const MAX_QUIZZES = 20;
-        const PIN_CODE = '4296'; // For reset functionality (if needed)
-
-        // Quotes Array
-        const QUOTES = [
-            "Believe in yourself, you’ve got this! 🌟",
-            "Every mistake is a chance to learn something new. 📚",
-            "Keep trying, your effort will pay off! 💪",
-            "You are braver than you think and smarter than you know. 🦁",
-            "A small step each day leads to big results. 🏆",
-            "Your kindness makes the world brighter. 🌈",
-            "Learning is an adventure—enjoy the journey! 🚀",
-            "Be proud of every progress you make, no matter how small. 🌱",
-            "Challenges help your brain grow stronger. 💡",
-            "Your smile can light up a whole classroom! 😄",
-            "Teamwork makes the dream work. 🤝",
-            "Stay curious and keep asking questions. 🔍",
-            "Your ideas matter—share them! 💬",
-            "You are important, and your work matters. ⭐",
-            "Be patient and keep practicing. 🎶",
-            "Mistakes show that you are trying. ✔️",
-            "Celebrate your victories, big and small. 🎉",
-            "Be the reason someone smiles today. 😊",
-            "The more you learn, the more you grow. 🌳",
-            "Don’t give up! Great things take time. ⏳",
-            "You can do amazing things, one step at a time. 🏅",
-            "Your determination is powerful. ⚡",
-            "Confidence comes from doing your best. 🌞",
-            "Dream big and work hard to achieve it. 🌙",
-            "Your uniqueness is your strength. 🌸",
-            "Reading expands your imagination. 📖",
-            "Keep an open mind, discover new things. 🗺️",
-            "Practice makes you better and better. 🎨",
-            "Your effort is worth more than your outcome. 🎈",
-            "Be kind, work hard, stay humble. 💕"
-        ];
-
-        // Student Data
-        let students = JSON.parse(localStorage.getItem('students')) || [
-            { id: 1, name: "Charlene", reading: 7, language: 8, quizzes: 13, homework: false },
-            { id: 2, name: "Mieke", reading: 12, language: 2, quizzes: 3, homework: false },
-            { id: 3, name: "Asa", reading: 2, language: 9, quizzes: 0, homework: false },
-            { id: 4, name: "Audrea", reading: 0, language: 0, quizzes: 0, homework: false },
-            { id: 5, name: "Zoe", reading: 0, language: 0, quizzes: 0, homework: false },
-            { id: 6, name: "Yolanda", reading: 0, language: 0, quizzes: 0, homework: false },
-            { id: 7, name: "Luna", reading: 0, language: 0, quizzes: 0, homework: false },
-            { id: 8, name: "Helena", reading: 0, language: 0, quizzes: 0, homework: false },
-            { id: 9, name: "Casper", reading: 0, language: 0, quizzes: 0, homework: false },
-            { id: 10, name: "Angelynn", reading: 0, language: 0, quizzes: 0, homework: false },
-            { id: 11, name: "Olivia Ou", reading: 0, language: 0, quizzes: 0, homework: false },
-            { id: 12, name: "Hilary", reading: 0, language: 0, quizzes: 0, homework: false },
-            { id: 13, name: "Olivia Lin", reading: 0, language: 0, quizzes: 0, homework: false },
-            { id: 14, name: "Emily", reading: 0, language: 0, quizzes: 0, homework: false },
-            { id: 15, name: "Weggis", reading: 0, language: 0, quizzes: 0, homework: false },
-            { id: 16, name: "Gianna", reading: 0, language: 0, quizzes: 0, homework: false },
-            { id: 17, name: "Mika", reading: 0, language: 0, quizzes: 0, homework: false },
-            { id: 18, name: "Thomas", reading: 0, language: 0, quizzes: 0, homework: false },
-        ];
-
-        let activeStudent = null;
-        let activeMetric = null;
-
-        // Initialize Application
-        window.onload = function() {
-            displayDaysLeft();
-            showDailyQuote();
-            renderHomework();
-            renderProgress();
-        };
-
-        // Display Days Left in the Month
-        function calculateDaysLeft() {
-            const now = new Date();
-            const year = now.getFullYear();
-            const month = now.getMonth();
-            const totalDays = new Date(year, month + 1, 0).getDate();
-            const today = now.getDate();
-            return totalDays - today;
-        }
-
-        function displayDaysLeft() {
-            const daysLeft = calculateDaysLeft();
-            const daysLeftElem = document.getElementById('days-left');
-            daysLeftElem.textContent = `📅 Only ${daysLeft} day${daysLeft !== 1 ? 's' : ''} left this month! Keep going! 🎉`;
-        }
-
-        // Display Daily Quote
-        function showDailyQuote() {
-            const today = new Date();
-            const dayOfMonth = today.getDate();
-            const quoteIndex = (dayOfMonth - 1) % QUOTES.length;
-            document.getElementById('daily-quote').textContent = QUOTES[quoteIndex];
-        }
-
-        // Save Data to Local Storage
-        function saveToLocalStorage() {
-            localStorage.setItem('students', JSON.stringify(students));
-        }
-
-        // Check if Student's Progress is Complete
-        function isStudentComplete(student) {
-            const readingPercent = Math.min((student.reading / MAX_READING) * 100, 100);
-            const languagePercent = Math.min((student.language / MAX_LANGUAGE) * 100, 100);
-            const quizzesPercent = Math.min((student.quizzes / MAX_QUIZZES) * 100, 100);
-            return (readingPercent === 100 && languagePercent === 100 && quizzesPercent === 100);
-        }
-
-        // Confetti for Student Completion
-        function triggerStudentConfetti(studentId) {
-            const myConfetti = confetti.create(document.body, {
-                resize: true,
-                useWorker: true
-            });
-
-            myConfetti({
-                particleCount: 100,
-                spread: 70,
-                origin: { y: 0.6 }
-            });
-        }
-
-        // Celebrate Student Completion
-        function celebrateStudentCompletion(student) {
-            if (isStudentComplete(student)) {
-                triggerStudentConfetti(student.id);
-                const studentNameElem = document.querySelector(`#progress-card-${student.id} .student-name`);
-                if (studentNameElem) {
-                    studentNameElem.classList.add('completed');
-                }
-            }
-        }
-
-        // Celebrate Class Completion
-        function triggerMassiveConfetti() {
-            const duration = 3000;
-            const end = Date.now() + duration;
-            const colors = ['#bb0000', '#ffffff', '#00bb00', '#0000bb', '#ffbb00', '#00bbbb', '#bb00bb'];
-
-            (function frame() {
+        function checkCompletion() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            const allChecked = Array.from(checkboxes).every(checkbox => checkbox.checked);
+            if (allChecked) {
                 confetti({
-                    particleCount: 50,
-                    startVelocity: 30,
-                    spread: 360,
-                    ticks: 60,
-                    origin: {
-                        x: Math.random(),
-                        y: Math.random() * 0.5
-                    },
-                    colors: colors
-                });
-
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
-                }
-            })();
-        }
-
-        // Update Class Progress Bar
-        function updateClassProgressBar() {
-            const totalMetrics = students.length * 3;
-            let completedMetrics = 0;
-
-            students.forEach(student => {
-                if (isStudentComplete(student)) {
-                    completedMetrics += 3;
-                }
-            });
-
-            const progressPercent = (completedMetrics / totalMetrics) * 100;
-            const progressFill = document.getElementById('class-progress-fill');
-            progressFill.style.width = `${progressPercent}%`;
-
-            if (progressPercent === 100) {
-                triggerMassiveConfetti();
-            }
-        }
-
-        // Render Homework Tracker
-        function renderHomework() {
-            const homeworkGrid = document.getElementById('homework-grid');
-            homeworkGrid.innerHTML = '';
-
-            students.forEach(student => {
-                const card = document.createElement('div');
-                card.classList.add('student-card');
-                card.id = `homework-card-${student.id}`;
-
-                card.innerHTML = `
-                    <input type="checkbox" id="homework-${student.id}" ${student.homework ? 'checked' : ''} onclick="toggleHomework(${student.id})">
-                    <label class="student-avatar" id="homework-avatar-${student.id}" for="homework-${student.id}">
-                        <!-- Avatar Image or Initials -->
-                        <img src="${getAvatarURL(student.name)}" alt="${student.name}" onerror="this.src='default-avatar.png'" style="width: 100%; height: 100%; border-radius: 50%;">
-                        <div class="homework-overlay" id="homework-overlay-${student.id}"></div>
-                    </label>
-                    <div class="student-name">${student.name}</div>
-                `;
-                homeworkGrid.appendChild(card);
-
-                // Show overlay if homework is done
-                if (student.homework) {
-                    document.getElementById(`homework-overlay-${student.id}`).classList.add('show');
-                }
-            });
-
-            checkAllHomework();
-        }
-
-        // Render Progress Tracker
-        function renderProgress() {
-            const progressGrid = document.getElementById('progress-grid');
-            progressGrid.innerHTML = '';
-
-            students.forEach(student => {
-                const card = document.createElement('div');
-                card.classList.add('student-card');
-                card.id = `progress-card-${student.id}`;
-
-                card.innerHTML = `
-                    <canvas id="confetti-${student.id}" class="confetti-canvas"></canvas>
-                    <img src="${getAvatarURL(student.name)}" alt="${student.name}" onerror="this.src='default-avatar.png'" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
-                    <h3 class="student-name">${student.name}</h3>
-                    <div class="progress-circle-container">
-                        <div class="progress-circle" onclick="openKeypad(${student.id}, 'reading', this)" data-selected="false" data-metric="reading" tabindex="0" role="button" aria-label="Reading progress: ${student.reading} out of ${MAX_READING}">
-                            <svg class="progress-ring" width="80" height="80">
-                                <circle class="progress-ring__background" stroke="#c5cae9" stroke-width="8" fill="transparent" r="30" cx="40" cy="40"/>
-                                <circle class="progress-ring__circle" stroke="#66bb6a" stroke-width="8" fill="transparent" r="30" cx="40" cy="40"/>
-                            </svg>
-                            <div class="progress-circle-content">
-                                <span>Reading</span><br>${student.reading}
-                            </div>
-                        </div>
-                        <div class="progress-circle" onclick="openKeypad(${student.id}, 'language', this)" data-selected="false" data-metric="language" tabindex="0" role="button" aria-label="Language progress: ${student.language} out of ${MAX_LANGUAGE}">
-                            <svg class="progress-ring" width="80" height="80">
-                                <circle class="progress-ring__background" stroke="#c5cae9" stroke-width="8" fill="transparent" r="30" cx="40" cy="40"/>
-                                <circle class="progress-ring__circle" stroke="#42a5f5" stroke-width="8" fill="transparent" r="30" cx="40" cy="40"/>
-                            </svg>
-                            <div class="progress-circle-content">
-                                <span>Language</span><br>${student.language}
-                            </div>
-                        </div>
-                        <div class="progress-circle" onclick="openKeypad(${student.id}, 'quizzes', this)" data-selected="false" data-metric="quizzes" tabindex="0" role="button" aria-label="Quizzes progress: ${student.quizzes} out of ${MAX_QUIZZES}">
-                            <svg class="progress-ring" width="80" height="80">
-                                <circle class="progress-ring__background" stroke="#c5cae9" stroke-width="8" fill="transparent" r="30" cx="40" cy="40"/>
-                                <circle class="progress-ring__circle" stroke="#ffa726" stroke-width="8" fill="transparent" r="30" cx="40" cy="40"/>
-                            </svg>
-                            <div class="progress-circle-content">
-                                <span>Quizzes</span><br>${student.quizzes}
-                            </div>
-                        </div>
-                    </div>
-                `;
-                progressGrid.appendChild(card);
-
-                // Set Progress Circles
-                setCircularProgress(card.querySelector('.progress-circle[data-metric="reading"]'), student.reading, MAX_READING);
-                setCircularProgress(card.querySelector('.progress-circle[data-metric="language"]'), student.language, MAX_LANGUAGE);
-                setCircularProgress(card.querySelector('.progress-circle[data-metric="quizzes"]'), student.quizzes, MAX_QUIZZES);
-
-                // Add medals if complete
-                if (isStudentComplete(student)) {
-                    card.querySelector('.student-name').classList.add('completed');
-                }
-
-                // Celebrate individual completion
-                celebrateStudentCompletion(student);
-            });
-
-            updateClassProgressBar();
-        }
-
-        // Helper Function to Get Avatar URL (Placeholder)
-        function getAvatarURL(name) {
-            // Replace spaces with hyphens and convert to lowercase for URL consistency
-            const formattedName = name.toLowerCase().replace(/\s+/g, '-');
-            return `https://raw.githubusercontent.com/Daverose123/ixl-app/main/images/${formattedName}.jpg`;
-        }
-
-        // Toggle Homework Completion
-        function toggleHomework(studentId) {
-            const student = students.find(s => s.id === studentId);
-            if (student) {
-                student.homework = !student.homework;
-                saveToLocalStorage();
-                renderHomework();
-                checkAllHomework();
-            }
-        }
-
-        // Check if All Homework is Completed
-        function checkAllHomework() {
-            const allHomeworkDone = students.every(student => student.homework);
-            if (allHomeworkDone) {
-                confetti({
-                    particleCount: 200,
+                    particleCount: 150,
                     spread: 70,
                     origin: { y: 0.6 }
                 });
-                alert("🎉 All homework completed! Great job! 🎉");
             }
         }
-
-        // Open Homework Section
-        function openHomework() {
-            document.getElementById('homework-section').classList.add('active');
-            document.getElementById('ixl-section').classList.remove('active');
-            document.getElementById('nav-homework').classList.add('active');
-            document.getElementById('nav-progress').classList.remove('active');
-        }
-
-        // Open Progress Section
-        function openProgress() {
-            document.getElementById('ixl-section').classList.add('active');
-            document.getElementById('homework-section').classList.remove('active');
-            document.getElementById('nav-progress').classList.add('active');
-            document.getElementById('nav-homework').classList.remove('active');
-        }
-
-        // Toggle Startup Modal
-        function closeStartupModal() {
-            document.getElementById('startup-modal').style.display = 'none';
-        }
-
-        // Initial Modal Display Logic
-        window.onload = function() {
-            // Render Sections
-            renderHomework();
-            renderProgress();
-            displayDaysLeft();
-            showDailyQuote();
-
-            // Show Modal
-            const modal = document.getElementById('startup-modal');
-            if (modal) {
-                modal.style.display = 'flex';
-            }
-        };
-
-        // Close Modal upon Selection
-        function openHomework() {
-            closeStartupModal();
-            renderHomework();
-            document.getElementById('homework-section').classList.add('active');
-            document.getElementById('ixl-section').classList.remove('active');
-            document.getElementById('nav-homework').classList.add('active');
-            document.getElementById('nav-progress').classList.remove('active');
-        }
-
-        function openProgress() {
-            closeStartupModal();
-            renderProgress();
-            document.getElementById('ixl-section').classList.add('active');
-            document.getElementById('homework-section').classList.remove('active');
-            document.getElementById('nav-progress').classList.add('active');
-            document.getElementById('nav-homework').classList.remove('active');
-        }
-
-        // Keypad Functions for Progress Tracker
-        function openKeypad(studentId, metric, element) {
-            activeStudent = students.find(s => s.id === studentId);
-            activeMetric = metric;
-            if (!activeStudent) return;
-
-            const keypad = document.getElementById('keypad');
-            const overlay = document.getElementById('keypad-overlay');
-            overlay.style.display = 'block';
-            keypad.style.display = 'block';
-            document.getElementById('keypad-display').textContent = activeStudent[metric];
-
-            // Highlight Selected Circle
-            document.querySelectorAll('.progress-circle').forEach(circle => {
-                circle.classList.remove('selected');
-            });
-            element.classList.add('selected');
-        }
-
-        function closeKeypad() {
-            document.getElementById('keypad').style.display = 'none';
-            document.getElementById('keypad-overlay').style.display = 'none';
-            activeStudent = null;
-            activeMetric = null;
-        }
-
-        function addKey(value) {
-            const display = document.getElementById('keypad-display');
-            display.textContent += value;
-        }
-
-        function clearKeypad() {
-            document.getElementById('keypad-display').textContent = '';
-        }
-
-        function saveKeypad() {
-            const display = document.getElementById('keypad-display');
-            const value = parseInt(display.textContent, 10);
-            if (!isNaN(value)) {
-                activeStudent[activeMetric] = Math.min(value, getMaxMetric(activeMetric));
-                saveToLocalStorage();
-                renderProgress();
-            }
-            closeKeypad();
-        }
-
-        function getMaxMetric(metric) {
-            if (metric === 'reading') return MAX_READING;
-            if (metric === 'language') return MAX_LANGUAGE;
-            if (metric === 'quizzes') return MAX_QUIZZES;
-            return 0;
-        }
-
-        // Set Circular Progress
-        function setCircularProgress(element, value, max) {
-            const circle = element.querySelector('.progress-ring__circle');
-            const radius = circle.r.baseVal.value;
-            const circumference = 2 * Math.PI * radius;
-            const percent = (value / max) * 100;
-            const offset = circumference - (percent / 100) * circumference;
-            circle.style.strokeDasharray = `${circumference} ${circumference}`;
-            circle.style.strokeDashoffset = offset;
-        }
-
-        // Render Progress Tracker
-        function renderProgress() {
-            const progressGrid = document.getElementById('progress-grid');
-            progressGrid.innerHTML = '';
-
-            students.forEach(student => {
-                const card = document.createElement('div');
-                card.classList.add('student-card');
-                card.id = `progress-card-${student.id}`;
-
-                card.innerHTML = `
-                    <canvas id="confetti-${student.id}" class="confetti-canvas"></canvas>
-                    <img src="${getAvatarURL(student.name)}" alt="${student.name}" onerror="this.src='default-avatar.png'" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
-                    <h3 class="student-name">${student.name}</h3>
-                    <div class="progress-circle-container">
-                        <div class="progress-circle" onclick="openKeypad(${student.id}, 'reading', this)" data-selected="false" data-metric="reading" tabindex="0" role="button" aria-label="Reading progress: ${student.reading} out of ${MAX_READING}">
-                            <svg class="progress-ring" width="80" height="80">
-                                <circle class="progress-ring__background" stroke="#c5cae9" stroke-width="8" fill="transparent" r="30" cx="40" cy="40"/>
-                                <circle class="progress-ring__circle" stroke="#66bb6a" stroke-width="8" fill="transparent" r="30" cx="40" cy="40"/>
-                            </svg>
-                            <div class="progress-circle-content">
-                                <span>Reading</span><br>${student.reading}
-                            </div>
-                        </div>
-                        <div class="progress-circle" onclick="openKeypad(${student.id}, 'language', this)" data-selected="false" data-metric="language" tabindex="0" role="button" aria-label="Language progress: ${student.language} out of ${MAX_LANGUAGE}">
-                            <svg class="progress-ring" width="80" height="80">
-                                <circle class="progress-ring__background" stroke="#c5cae9" stroke-width="8" fill="transparent" r="30" cx="40" cy="40"/>
-                                <circle class="progress-ring__circle" stroke="#42a5f5" stroke-width="8" fill="transparent" r="30" cx="40" cy="40"/>
-                            </svg>
-                            <div class="progress-circle-content">
-                                <span>Language</span><br>${student.language}
-                            </div>
-                        </div>
-                        <div class="progress-circle" onclick="openKeypad(${student.id}, 'quizzes', this)" data-selected="false" data-metric="quizzes" tabindex="0" role="button" aria-label="Quizzes progress: ${student.quizzes} out of ${MAX_QUIZZES}">
-                            <svg class="progress-ring" width="80" height="80">
-                                <circle class="progress-ring__background" stroke="#c5cae9" stroke-width="8" fill="transparent" r="30" cx="40" cy="40"/>
-                                <circle class="progress-ring__circle" stroke="#ffa726" stroke-width="8" fill="transparent" r="30" cx="40" cy="40"/>
-                            </svg>
-                            <div class="progress-circle-content">
-                                <span>Quizzes</span><br>${student.quizzes}
-                            </div>
-                        </div>
-                    </div>
-                `;
-                progressGrid.appendChild(card);
-
-                // Set Progress Circles
-                setCircularProgress(card.querySelector('.progress-circle[data-metric="reading"]'), student.reading, MAX_READING);
-                setCircularProgress(card.querySelector('.progress-circle[data-metric="language"]'), student.language, MAX_LANGUAGE);
-                setCircularProgress(card.querySelector('.progress-circle[data-metric="quizzes"]'), student.quizzes, MAX_QUIZZES);
-
-                // Add medals if complete
-                if (isStudentComplete(student)) {
-                    card.querySelector('.student-name').classList.add('completed');
-                }
-
-                // Celebrate individual completion
-                celebrateStudentCompletion(student);
-            });
-
-            updateClassProgressBar();
-        }
-
-        // Check if All Progress is Complete
-        function checkAllProgress() {
-            const allProgressDone = students.every(student => isStudentComplete(student));
-            if (allProgressDone) {
-                confetti({
-                    particleCount: 300,
-                    spread: 70,
-                    origin: { y: 0.6 }
-                });
-                alert("🎉 All students have achieved 100%! Fantastic work! 🎉");
-            }
-        }
-
-        // Update Class Progress Bar and Check Completion
-        function updateClassProgressBar() {
-            const totalMetrics = students.length * 3;
-            let completedMetrics = 0;
-
-            students.forEach(student => {
-                if (isStudentComplete(student)) {
-                    completedMetrics += 3;
-                }
-            });
-
-            const progressPercent = (completedMetrics / totalMetrics) * 100;
-            const progressFill = document.getElementById('class-progress-fill');
-            progressFill.style.width = `${progressPercent}%`;
-
-            if (progressPercent === 100) {
-                triggerMassiveConfetti();
-                alert("🌟 Class has achieved 100% progress! Amazing job! 🌟");
-            }
-        }
-
-        // Trigger Massive Confetti
-        function triggerMassiveConfetti() {
-            const duration = 3000;
-            const end = Date.now() + duration;
-            const colors = ['#bb0000', '#ffffff', '#00bb00', '#0000bb', '#ffbb00', '#00bbbb', '#bb00bb'];
-
-            (function frame() {
-                confetti({
-                    particleCount: 50,
-                    startVelocity: 30,
-                    spread: 360,
-                    ticks: 60,
-                    origin: {
-                        x: Math.random(),
-                        y: Math.random() * 0.5
-                    },
-                    colors: colors
-                });
-
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
-                }
-            })();
-        }
-
-        // Celebrate Student Completion
-        function celebrateStudentCompletion(student) {
-            if (isStudentComplete(student)) {
-                triggerStudentConfetti(student.id);
-                const studentNameElem = document.querySelector(`#progress-card-${student.id} .student-name`);
-                if (studentNameElem) {
-                    studentNameElem.classList.add('completed');
-                }
-            }
-        }
-
-        // Handle Keypad Input
-        function openKeypad(studentId, metric, element) {
-            activeStudent = students.find(s => s.id === studentId);
-            activeMetric = metric;
-            if (!activeStudent) return;
-
-            const keypad = document.getElementById('keypad');
-            const overlay = document.getElementById('keypad-overlay');
-            overlay.style.display = 'block';
-            keypad.style.display = 'block';
-            document.getElementById('keypad-display').textContent = activeStudent[metric];
-
-            // Highlight Selected Circle
-            document.querySelectorAll('.progress-circle').forEach(circle => {
-                circle.classList.remove('selected');
-            });
-            element.classList.add('selected');
-        }
-
-        function closeKeypad() {
-            document.getElementById('keypad').style.display = 'none';
-            document.getElementById('keypad-overlay').style.display = 'none';
-            activeStudent = null;
-            activeMetric = null;
-        }
-
-        function addKey(value) {
-            const display = document.getElementById('keypad-display');
-            display.textContent += value;
-        }
-
-        function clearKeypad() {
-            document.getElementById('keypad-display').textContent = '';
-        }
-
-        function saveKeypad() {
-            const display = document.getElementById('keypad-display');
-            const value = parseInt(display.textContent, 10);
-            if (!isNaN(value)) {
-                activeStudent[activeMetric] = Math.min(value, getMaxMetric(activeMetric));
-                saveToLocalStorage();
-                renderProgress();
-            }
-            closeKeypad();
-        }
-
-        function getMaxMetric(metric) {
-            if (metric === 'reading') return MAX_READING;
-            if (metric === 'language') return MAX_LANGUAGE;
-            if (metric === 'quizzes') return MAX_QUIZZES;
-            return 0;
-        }
-
-        // Keypad Accessibility
-        document.addEventListener('keydown', function(event) {
-            if (event.key === 'Escape') {
-                closeKeypad();
-            }
-        });
-
-        document.querySelectorAll('.keypad .key').forEach(key => {
-            key.addEventListener('keydown', function(event) {
-                if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    key.click();
-                }
-            });
-        });
-
-        document.querySelectorAll('.progress-circle').forEach(circle => {
-            circle.addEventListener('keydown', function(event) {
-                if (event.key === 'Enter' || event.key === ' ') {
-                    event.preventDefault();
-                    circle.click();
-                }
-            });
-        });
-
-        // Handle Navigation Buttons
-        document.getElementById('nav-homework').addEventListener('click', function() {
-            openHomework();
-        });
-
-        document.getElementById('nav-progress').addEventListener('click', function() {
-            openProgress();
-        });
     </script>
 </body>
 </html>
